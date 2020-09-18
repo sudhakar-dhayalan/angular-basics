@@ -35,6 +35,31 @@ import { Component, OnInit } from '@angular/core';
               <span [class]="classbinding">{{name}} - class binding</span>  <br>
               <span [ngClass]="classbindingObject">{{name}} - ngClass : uses property name to get the class. This can be setted dynamically</span>  <br>
             </div>
+            
+            <hr>
+            Style Binding - same as class property binding
+            <div class="content">
+              <span [style.color]="'orange'">style binding 1</span>       
+              <br><span [style.color]="hasError ? 'red' : 'green'">style binding 2 - using conditional operator</span>
+              <br><span [ngStyle]="styleBindingObject">style binding 3 - using ngStyle</span>
+            </div>
+            
+            <hr>
+            Event binding - $event
+            <div class="content">
+              <button (click)="greetFunctionFromClick()">EventBinding</button> {{greeting}}
+              <br>
+              <button (click)="greetFunctionFromClickEvent($event)">ClickEventBinding</button> {{greetingUsingEvent}}
+            </div>
+            
+            <hr>
+            Template reference variable
+            <div class="content">
+              <input #myInput type="text">
+              <button (click)="templateRef(myInput)">Log</button>{{ref}}
+            </div>
+            
+            
           </div>
             `,
   // styleUrls: ['./test.component.css']
@@ -60,14 +85,19 @@ export class TestComponent implements OnInit {
   public prop = "TestingPropertyBinding";
   public classbinding = "success"; //directly binded the class to an property named classbinding
   public isItalic = "true";
-  public hasError = "false";
+  public hasError = true;
   public classbindingObject = {
                 success : !this.hasError,
-                failure : this.hasError,               
+                failure : this.hasError,
                 italictext: this.isItalic
   };
 
   public interpolationSymbol = "{{}}";
+
+  public styleBindingObject = {
+    color: "violet",
+    fontStyle: "italic"
+  };
   constructor() { }
 
   ngOnInit(): void {
@@ -77,4 +107,19 @@ export class TestComponent implements OnInit {
     return "hello from the method greetUser";
   }
 
+  public greeting;
+  greetFunctionFromClick() {
+    this.greeting = "Hello Sudhakar";
+  }
+
+  public greetingUsingEvent;
+  greetFunctionFromClickEvent(event) {
+    this.greetingUsingEvent = event.type;
+  }
+
+  public ref;
+  public templateRef(ref) {
+    console.log(ref);  //refers DOM Element and its properties
+    this.ref = ref.value;   //dom value
+  }
 }
