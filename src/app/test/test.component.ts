@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+// import {EventEmitter} from "events";
+// import {Output} from "@angular/compiler/src/core";
 
 @Component({
   selector: '[app-test]',
@@ -7,22 +9,26 @@ import { Component, OnInit } from '@angular/core';
   // {{}} = This is called as "Interpolation" (In AngularJs, expression)
   template: `
           <div>
-            Interpolation SYMBOL {{interpolationSymbol}}
-              <div class="content">
-                Welcome {{name}}
-                {{"welcome " + name}}
-                <br>{{"welcome " + name.length}}
-                <br>{{greetUser()}}
-              </div>
-            
+            Component Interaction
+            <div class="content">
+              Parent to child
+              <br>
+              <span>{{parentData}}</span>    
+                <br><br>
+              Child to parent
+              <br>
+              <span>This can only be achieved through events only</span>
+              <br><button (click)="fireEvent()">Generate</button>
+            </div>
+                       
             <hr>
             Property Binding SYMBOL []
-              <div class="content"> 
+            <div class="content"> 
                 <input type="text" value="{{prop}}">            
                 <br><input id="prop" type="text" value="{{prop}}">
                 <br>setting the property disabled to false doesn't work; prop - property can be used to assign values to attribute 
                 <br><input disabled="false" id="{{prop}}" type="text" value="{{prop}}">
-                <br>use property binding 
+                <br>use property binding -
                 <br><input [disabled]="false" id="prop" type="text" value="{{prop}}">
                 
                 <br><input bind-disabled="false" id="prop" type="text" value="{{prop}}">
@@ -59,6 +65,43 @@ import { Component, OnInit } from '@angular/core';
               <button (click)="templateRef(myInput)">Log</button>{{ref}}
             </div>
             
+            <hr>
+            Two way binding
+            <div class="content">
+              <input [(ngModel)]="twoWayBinding" type="text">
+              <br><span>{{twoWayBinding}}</span>
+            </div>
+            
+            <hr>
+            Structural Directive - *ngIf
+            <div class="content">
+              *ngIf - Used to dynamically choose between two html elements
+              <br>
+              <span *ngIf="ifDirective_1; else elseTemp">Method 1: if</span>
+              <ng-template #elseTemp>
+                <span>Method 1: else</span>
+              </ng-template>
+              
+              <br>
+              
+              <span *ngIf="ifDirective_2; then ifBlock; else elseBlock"></span>
+              
+              <ng-template #ifBlock>
+                <span>Method 2: if</span>
+              </ng-template>
+              
+              <ng-template #elseBlock>
+                <span>Method 2: else</span>
+              </ng-template>
+            </div>
+            
+            <hr>
+            ngSwitch and ngFor
+            <div class="content">
+              <span>Both were similar to ngIf</span>
+              <br><span>[ngSitch] - *ngSwitchCase, *ngSitchDefault</span>
+              <br><span>*ngFor = "prop in properties" - can use this prop in interpolation</span>
+            </div>
             
           </div>
             `,
@@ -80,7 +123,11 @@ import { Component, OnInit } from '@angular/core';
   `]
 })
 export class TestComponent implements OnInit {
-
+  @Input() public parentData;
+  @Output() public childEvent = new EventEmitter();
+  fireEvent() {
+    this.childEvent.emit('child to parent communication through event');
+  }
   public name = "Sudhakar";
   public prop = "TestingPropertyBinding";
   public classbinding = "success"; //directly binded the class to an property named classbinding
@@ -122,4 +169,9 @@ export class TestComponent implements OnInit {
     console.log(ref);  //refers DOM Element and its properties
     this.ref = ref.value;   //dom value
   }
+
+  public twoWayBinding = "";
+  public ifDirective_1 = true;
+  public ifDirective_2 = false;
+
 }

@@ -8,12 +8,14 @@
 <div class="maincontainer" role="banner">
   <div class="header"><h1>{{title}} !!!</h1></div>
   <hr>
+  <div><h2>{{"Parent Component:" + message}}</h2></div>
+  <hr>
   <h3>
     <!-- 3 types of Selectors -->
     <!-- <app-test></app-test>               = selector: 'app-test' -->
     <!-- <div class="app-test"></div>        = selector: '.app-test' -->
     <!--  selector: '[app-test]' -->
-    <div app-test></div>
+    <div app-test (childEvent)="message=$event" [parentData]="fromParent"></div>
   </h3>
 </div>
 

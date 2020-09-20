@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'My First Angular App';
+  public fromParent = "Greeting form app component to test component";
+  public message = "";
 }
