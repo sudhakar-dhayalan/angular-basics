@@ -18,6 +18,11 @@
     <div app-test (childEvent)="message=$event" [parentData]="fromParent"></div>
   </h3>
 
+  <!--Directive-->
+  <hr>
+  <div appChangingColorDirective [bgColor]="'violet'">
+    This is a directive
+  </div>
   <hr>
   Services
   <employee-list></employee-list>

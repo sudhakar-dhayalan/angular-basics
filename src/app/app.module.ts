@@ -7,15 +7,17 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
-import {EmployeeService} from "./employee.service";
-import {HttpClientModule} from "@angular/common/http";
+import {EmployeeService} from './employee.service';
+import {HttpClientModule} from '@angular/common/http';
+import { ChangingColorDirectiveDirective } from './changing-color-directive.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     EmployeeListComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    ChangingColorDirectiveDirective
   ],
   imports: [
     BrowserModule,
