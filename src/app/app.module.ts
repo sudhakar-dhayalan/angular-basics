@@ -10,6 +10,7 @@ import { EmployeeDetailComponent } from './employee-detail/employee-detail.compo
 import {EmployeeService} from './employee.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ChangingColorDirectiveDirective } from './changing-color-directive.directive';
+import { MyIfCustomDirectiveDirective } from './my-if-custom-directive.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ChangingColorDirectiveDirective } from './changing-color-directive.dire
     TestComponent,
     EmployeeListComponent,
     EmployeeDetailComponent,
-    ChangingColorDirectiveDirective
+    ChangingColorDirectiveDirective,
+    MyIfCustomDirectiveDirective
   ],
   imports: [
     BrowserModule,
