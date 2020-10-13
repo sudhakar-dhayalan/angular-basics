@@ -24,6 +24,15 @@
     This is a directive
   </div>
   <hr>
+  Custom Directive - TemplateRef, ViewContainerRef
+  <div *appMyIfCustomDirective="condition">
+    This will show up if the contition is true
+  </div>
+
+  <div *appMyIfCustomDirective="!condition">
+    This is not of condition. i.e, !condition
+  </div>
+  <hr>
   Services
   <employee-list></employee-list>
 
